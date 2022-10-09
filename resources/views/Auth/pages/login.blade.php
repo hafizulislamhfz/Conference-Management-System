@@ -40,7 +40,7 @@
                         <button type="submit" class="btn btn-blue text-center">Login</button>
                     </div>
                     <div class="row mb-4 px-3">
-                        <small class="font-weight-bold">Don't have an account? <a class="text-danger ">Register</a></small>
+                        <small class="font-weight-bold">Don't have an account? <a class="text-danger" href="{{ url('register') }}">Register</a></small>
                     </div>
                 </div>
             </div>
