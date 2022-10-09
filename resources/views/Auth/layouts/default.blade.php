@@ -5,5 +5,6 @@
 </head>
 <body>
   @yield("login")
+  @yield("register")
 </body>
 </html>

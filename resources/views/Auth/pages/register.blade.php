@@ -1,78 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title }}</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <style>
-                /*
-        *
-        * ==========================================
-        * CUSTOM UTIL CLASSES
-        * ==========================================
-        *
-        */
+@extends('Auth.layouts.default')
 
-        .border-md {
-            border-width: 2px;
-        }
-
-        .btn-facebook {
-            background: #405D9D;
-            border: none;
-        }
-
-        .btn-facebook:hover, .btn-facebook:focus {
-            background: #314879;
-        }
-
-        .btn-twitter {
-            background: #42AEEC;
-            border: none;
-        }
-
-        .btn-twitter:hover, .btn-twitter:focus {
-            background: #1799e4;
-        }
-
-
-
-        /*
-        *
-        * ==========================================
-        * FOR DEMO PURPOSES
-        * ==========================================
-        *
-        */
-
-        body {
-            min-height: 100vh;
-        }
-
-        .form-control:not(select) {
-            padding: 1.5rem 0.5rem;
-        }
-
-        select.form-control {
-            height: 52px;
-            padding-left: 0.5rem;
-        }
-
-        .form-control::placeholder {
-            color: #ccc;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-        .form-control:focus {
-            box-shadow: none;
-        }
-    </style>
-</head>
+@section('register')
 <body>
     <!-- Navbar-->
     <header class="header mt-n4">
@@ -204,7 +132,7 @@
                         <!-- Social Login -->
                         <div class="form-group col-lg-12 mx-auto">
                             <a href="#" class="btn btn-primary btn-block py-2 btn-facebook">
-                                <i class="fa fa-facebook-f mr-2"></i>
+                                <i class="fa fa-facebook mr-2"></i>
                                 <span class="font-weight-bold">Continue with Facebook</span>
                             </a>
                             <a href="#" class="btn btn-primary btn-block py-2 btn-twitter">
@@ -215,7 +143,7 @@
 
                         <!-- Already Registered -->
                         <div class="text-center w-100">
-                            <p class="text-muted font-weight-bold">Already Registered? <a href="{{ url('login') }}" class="text-primary ml-2">Login</a></p>
+                            <p class="text-muted font-weight-bold">Already Registered? <a href="{{ url('') }}" class="text-primary ml-2">Login</a></p>
                         </div>
 
                     </div>
@@ -236,5 +164,4 @@
         });
 
     </script>
-</body>
-</html>
+@endsection
