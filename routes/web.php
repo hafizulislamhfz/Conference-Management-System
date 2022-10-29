@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +16,7 @@ use App\Http\Controllers\AuthController;
 
 
 Route::get('/',[AuthController::class, 'login']);
-
-
 Route::get('register',[AuthController::class, 'register']);
+
+Route::get('admin-pannel',[AdminController::class, 'admin']);
+Route::get('admin-profile',[AdminController::class, 'profile']);
