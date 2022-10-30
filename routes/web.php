@@ -14,8 +14,8 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-
-Route::get('/',[AuthController::class, 'login']);
+Route::get('/',[AuthController::class, 'all']);
+Route::get('login',[AuthController::class, 'login']);
 Route::get('register',[AuthController::class, 'register']);
 
 Route::get('admin-pannel',[AdminController::class, 'admin']);

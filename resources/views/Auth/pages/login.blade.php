@@ -37,8 +37,8 @@
                         <a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a>
                     </div>
                     <div class="row mb-3 px-3">
-                        <button type="submit" class="btn btn-blue text-center">Login</button>
-                        <a type="button" class="btn btn-blue text-white">All Conference</a>
+                        <button type="submit" class="btn btn-blue text-center mr-5">Login</button>
+                        <a type="button" class="btn btn-success text-white ml-5" href="{{ url('') }}">Current Conference</a>
                     </div>
                     <div class="row mb-4 px-3">
                         <small class="font-weight-bold">Don't have an account? <a class="text-danger" href="{{ url('register') }}">Register</a></small>

@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+    public function all(){
+        return view('all',['title'=>'All Conferences']);
+    }
+
     public function login(){
         return view('Auth.pages.login',['title'=>'Login']);
     }
