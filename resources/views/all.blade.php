@@ -27,64 +27,8 @@
     .nav{
         background: #0c469c;
     }
-    .login{
-        margin-right:300px;
-    }
-    #login-dp{
-    min-width: 250px;
-    padding: 14px 14px 0;
-    overflow:hidden;
-    background-color:#FFF5EE;
-    }
-    #login-dp:hover{
-    background-color:#F5F5DC;
-    }
-    #login-dp .help-block{
-        font-size:12px    
-    }
-    #login-dp .bottom{
-        background-color:rgba(255,255,255,.8);
-        border-top:1px solid #ddd;
-        clear:both;
-        padding:14px;
-    }
-    #login-dp .social-buttons{
-        margin:12px 0    
-    }
-    #login-dp .social-buttons a{
-        width: 49%;
-    }
-    #login-dp .form-group {
-        margin-bottom: 10px;
-    }
-    .btn-fb{
-        color: #fff;
-        background-color:#3b5998;
-    }
-    .btn-fb:hover{
-        color: #fff;
-        background-color:#496ebc 
-    }
-    .btn-tw{
-        color: #fff;
-        background-color:#55acee;
-    }
-    .btn-tw:hover{
-        color: #fff;
-        background-color:#59b5fa;
-    }
     @media(max-width:768px){
-        .login{
-        margin-right:200px;
-        }
-        #login-dp{
-            background-color: inherit;
-            color: #fff;
-        }
-        #login-dp .bottom{
-            background-color: inherit;
-            border-top:0 none;
-        }
+        
     }
     </style>
 </head>
@@ -93,45 +37,11 @@
     <nav class="mb-1 navbar navbar-expand-lg nav">
         <a class="navbar-brand ml-4 logo" href="#">ConferenceDirect</a>
             <ul class="navbar-nav ml-auto nav-flex-icons">
-                <li class="dropdown">
-                    <button href="#" class="dropdown-toggle btn btn-primary login" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></button>
-                    <ul id="login-dp" class="dropdown-menu">
-                        <li>
-                            <div class="row">
-                                    <div class="col-md-12">
-                                        Login via
-                                        <div class="social-buttons">
-                                            <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-                                            <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
-                                        </div>
-                                        or
-                                        <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                                                    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
-                                                    <div class="help-block text-left mt-2">
-                                                    <label class="mr-5">
-                                                        <input type="checkbox"> keep me logged-in
-                                                    </label>
-                                                        <a href="" class="ml-5">Forget the password ?</a>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                                                </div>
-                                                
-                                        </form>
-                                    </div>
-                                    <div class="bottom text-center">
-                                        New here ? <a href="{{ url('register') }}"><b>Register</b></a>
-                                    </div>
-                            </div>
-                        </li>
-                    </ul>
+                <li class="login">
+                    <label for="" class="text-white mr-2">Already have an account?</label>
+                    <a type="button" href="{{ url('login') }}" class="btn btn-primary mr-2"><b>Signin</b></a>
+                    <label for="" class="text-white mr-2">nor</label>
+                    <a type="button" href="{{ url('register') }}" class="btn btn-primary mr-5"><b>Signup</b></a>
                 </li>
             </ul>
     </nav>
@@ -140,21 +50,25 @@
         <table class="table table-bordered mt-3">
             <tr class="table-primary">
                 <th>
-                    <h3 class="text-center all">Current Conferences</h3>
+                    <h3 class="text-center all mt-1">Current Conferences</h3>
+                </th>
+                <th>
+                    <form action="" method="post" class="">
+                        <div class="form-group mt-1 mb-n2">
+                            <select name="" id="" class="form-control font-weight-bold">
+                                <option value="0">All category...</option>
+                                @foreach($category as $c)
+                                <option value="">{{ $c->category }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                 </th>
                 <th class="">
-                    <div class="row">
-                        <div class="col-md-6">
+                        <div class="form-inline">
+                            <input type="text" class="form-control ml-4 mt-1" placeholder="Search">
+                            <button type="submit" class="btn btn-primary ml-2 mt-1">Search</button>
                         </div>
-                        <div class="col-md-6">
-                        <form class="form-inline" role="search">
-                                <div class="form-group">
-                                    <input type="text" class="form-control ml-4 mt-1" placeholder="Search">
-                                </div>
-                                <button type="submit" class="btn btn-primary ml-3">Search</button>
-                            </form>
-                        </div>
-                    </div>
+                    </form>
                 </th>
             </tr>      
         </table>
@@ -163,24 +77,50 @@
                 <th>Conference Name</th>
                 <th>Start Date</th>
                 <th>End Date</th>
-                <th>Topic</th>
+                <th>Location</th>
+                <th>Category</th>
             </tr>
             <tr>
-                <td>Computer Speed</td>
+                <td><a href="" data-toggle="modal" data-target="#myModal">Computer Speed</a></td>
+                <!-- The Modal -->
+                <div class="modal" id="myModal">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Computer Speed</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                Modal body..
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <td>10.10.2022</td>
                 <td>12.10.2022</td>
+                <td>Chittagong</td>
                 <td>Computer</td>
             </tr>
             <tr>
-                <td>Computer Speed</td>
+                <td><a href="" data-toggle="modal" data-target="#myModal"> Computer Speed</a></td>
                 <td>10.10.2022</td>
                 <td>12.10.2022</td>
+                <td>Chittagong</td>
                 <td>Computer</td>
             </tr>
             <tr>
-                <td>Computer Speed</td>
+                <td><a href="" data-toggle="modal" data-target="#myModal"> Computer Speed</a></td>
                 <td>10.10.2022</td>
                 <td>12.10.2022</td>
+                <td>Chittagong</td>
                 <td>Computer</td>
             </tr>
         </table>

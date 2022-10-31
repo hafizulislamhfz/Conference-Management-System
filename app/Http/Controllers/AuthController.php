@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class AuthController extends Controller
 {
     public function all(){
-        return view('all',['title'=>'All Conferences']);
+        $category = Category::all();
+        return view('all',['title'=>'All Conferences'],compact('category'));
     }
 
     public function login(){
@@ -16,6 +18,7 @@ class AuthController extends Controller
 
 
     public function register(){
-        return view('Auth.pages.register',['title'=>'Register']);
+        $category = Category::all();
+        return view('Auth.pages.register',['title'=>'Register'],compact('category'));
     }
 }

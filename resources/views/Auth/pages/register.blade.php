@@ -87,11 +87,10 @@
                                 </span>
                             </div>
                             <select id="job" name="jobtitle" class="form-control custom-select bg-white border-left-0 border-md">
-                                <option value="">Choose your job</option>
-                                <option value="">Designer</option>
-                                <option value="">Developer</option>
-                                <option value="">Manager</option>
-                                <option value="">Accountant</option>
+                                <option value="0">All category...</option>
+                                @foreach($category as $c)
+                                <option value="">{{ $c->category }}</option>
+                                @endforeach
                             </select>
                         </div>
 
