@@ -65,8 +65,8 @@
                 </th>
                 <th class="">
                         <div class="form-inline">
-                            <input type="text" class="form-control ml-4 mt-1" placeholder="Search">
-                            <button type="submit" class="btn btn-primary ml-2 mt-1">Search</button>
+                            <input type="text" class="form-control ml-4 mt-1" placeholder="keyword">
+                            <button type="submit" class="btn btn-primary ml-2 mt-1">Filter</button>
                         </div>
                     </form>
                 </th>

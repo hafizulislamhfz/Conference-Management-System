@@ -21,27 +21,37 @@
                         <small class="or text-center">Login</small>
                         <div class="line"></div>
                     </div>
-                    <div class="row px-3 mt-2">
-                        <label class="mb-1"><h6 class="mb-0 text-sm">Email Address</h6></label>
-                        <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address">
-                    </div>
-                    <div class="row px-3">
-                        <label class="mb-1"><h6 class="mb-0 text-sm">Password</h6></label>
-                        <input type="password" name="password" placeholder="Enter password">
-                    </div>
-                    <div class="row px-3 mb-4">
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                            <input id="chk1" type="checkbox" name="chk" class="custom-control-input"> 
-                            <label for="chk1" class="custom-control-label text-sm">Remember me</label>
+                    <form action="{{ url('store_login') }}" method="post">
+                    {{ csrf_field() }}
+                        <div class="row px-3 mt-2">
+                            <label class="mb-1"><h6 class="mb-0 text-sm">Email Address</h6></label>
+                            <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address" required>
                         </div>
-                        <a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a>
-                    </div>
-                    <div class="row mb-3 px-3">
-                        <button type="submit" class="btn btn-blue text-center mr-5">Login</button>
-                        <a type="button" class="btn btn-success text-white ml-5" href="{{ url('') }}">Current Conferences</a>
-                    </div>
+                        <div class="row px-3">
+                            <label class="mb-1"><h6 class="mb-0 text-sm">Password</h6></label>
+                            <input type="password" name="password" placeholder="Enter password" required>
+                        </div>
+                        <div class="row px-3 mb-4">
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input id="chk1" type="checkbox" name="chk" class="custom-control-input"  checked> 
+                                <label for="chk1" class="custom-control-label text-sm">Remember me</label>
+                            </div>
+                            <a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a>
+                        </div>
+                        <div class="row mb-3 px-3">
+                            <button type="submit" class="btn btn-blue text-center mr-5">Login</button>
+                            <a type="button" class="btn btn-success text-white ml-5" href="{{ url('') }}">Current Conferences</a>
+                        </div>
+                    </form>
                     <div class="row mb-4 px-3">
-                        <small class="font-weight-bold">Don't have an account? <a class="text-danger" href="{{ url('register') }}">Register</a></small>
+                        <small class="font-weight-bold">Don't have an account? <a class="text-info" href="{{ url('register') }}">Register</a></small>
+                    </div>
+                    <div class="row mb-1">
+                    @if(Session::has('info'))
+                        <div class="text-danger ml-3">
+                            <strong>{{ Session::get('info') }}</strong>
+                        </div>
+                    @endif
                     </div>
                 </div>
             </div>
