@@ -7,9 +7,9 @@
   @include('Admin.includes.navbar')
   @include('Admin.includes.slidebar')
  
-    @yield("admin")
+  @yield("admin")
 
-    @yield("profile")
+  @yield("profile")
 
   
 

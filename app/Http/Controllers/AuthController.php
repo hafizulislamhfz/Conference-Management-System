@@ -27,7 +27,7 @@ class AuthController extends Controller
             ->first();
 
         if($user){
-            if($user->active == 0){
+            if($user->status == 0){
                 return redirect()->back()->with('info', 'You permission was denied');
             }
             else{
