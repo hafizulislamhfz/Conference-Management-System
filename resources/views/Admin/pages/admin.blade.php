@@ -27,25 +27,35 @@
                 <form action="" method="post">
                   <div class="form-group">
                     <label for="">Name</label>
-                    <input type="text" name="name" id="" class="form-control" placeholder="Enter Conference Name">
+                    <input type="text" name="name" id="" class="form-control" placeholder="Enter Conference Name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Category</label>
+                      <select name="" id="" class="form-control font-weight-bold" required>
+                                  <option value="0">Select category...</option>
+                                  @foreach($category as $c)
+                                  <option value="">{{ $c->category }}</option>
+                                  @endforeach
+                              </select>
+                      </select>
                   </div>
                   <div class="form-group">
                     <label for="">Description</label>
-                    <textarea name="description" id="" cols="10" rows="4" class="form-control"></textarea>
+                    <textarea name="description" id="" cols="10" rows="4" class="form-control" required></textarea>
                   </div>
                   <div class="form-row">
                     <div class="col">
                       <label for="">Start Date</label>
-                      <input type="date" class="form-control" placeholder="First name">
+                      <input type="date" class="form-control" required>
                     </div>
                     <div class="col">
                       <label for="">End Date</label>
-                      <input type="date" class="form-control" placeholder="Last name">
+                      <input type="date" class="form-control" required>
                     </div>
                   </div>
                   <div class="form-group mt-2">
                     <label for="">Location</label>
-                    <input type="text" name="" id="" class="form-control" placeholder="Enter your conference location">
+                    <input type="text" name="" id="" class="form-control" placeholder="Enter your conference location" required>
                   </div>
                 
               </div>
@@ -73,7 +83,63 @@
         <th>Actions</th>
       </tr>
       <tr>
-        <td>Premier University</td>
+        <td><a href="" data-toggle="modal" data-target="#myModal">Computer Speed</a></td>
+            <!-- The Modal -->
+            <div class="modal" id="myModal">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Computer Speed</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                          <form>
+                            <fieldset disabled>
+                              <div class="form-group">
+                                <label for="">Name</label>
+                                <input type="text" name="name" id="" class="form-control" placeholder="Enter Conference Name" required>
+                              </div>
+                              <div class="form-group">
+                                <label for="">Category</label>
+                                  <select name="" id="" class="form-control font-weight-bold" required>
+                                              <option value="0">Select category...</option>
+                                              @foreach($category as $c)
+                                              <option value="">{{ $c->category }}</option>
+                                              @endforeach
+                                          </select>
+                                  </select>
+                              </div>
+                              <div class="form-group">
+                                <label for="">Description</label>
+                                <textarea name="description" id="" cols="10" rows="4" class="form-control" required></textarea>
+                              </div>
+                              <div class="form-row">
+                                <div class="col">
+                                  <label for="">Start Date</label>
+                                  <input type="date" class="form-control" required>
+                                </div>
+                                <div class="col">
+                                  <label for="">End Date</label>
+                                  <input type="date" class="form-control" required>
+                                </div>
+                              </div>
+                              <div class="form-group mt-2">
+                                <label for="">Location</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="Enter your conference location" required>
+                              </div>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         <td>02.10.22</td>
         <td>02.10.22</td>
         <td><span class="badge badge-primary">Active</span></td>

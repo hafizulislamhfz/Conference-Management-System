@@ -24,6 +24,7 @@ Route::get('register',[AuthController::class, 'register']);
 
 Route::get('admin-pannel',[AdminController::class, 'admin']);
 Route::get('admin-profile',[AdminController::class, 'profile']);
+Route::get('admin-users',[AdminController::class, 'users']);
 
 Route::get('conference-admin-pannel',[CAdminController::class, 'admin']);
 Route::get('conference-admin-profile',[CAdminController::class, 'profile']);
