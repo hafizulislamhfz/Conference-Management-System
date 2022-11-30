@@ -1,12 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AuthorController;
-use App\Http\Controllers\CAdminController;
-use App\Http\Controllers\ReviewerController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,34 +14,18 @@ use App\Http\Controllers\ReviewerController;
 |
 */
 
-Route::get('/',[HomeController::class, 'all']);
-
-Route::get('login',[AuthController::class, 'login']);
-Route::post('store_login',[AuthController::class, 'store_login']);
-Route::get('register',[AuthController::class, 'register']);
-
-Route::prefix('admin')->group(function () {
-    Route::get('pannel',[AdminController::class, 'admin']);
-    Route::get('profile',[AdminController::class, 'profile']);
-    Route::get('users',[AdminController::class, 'users']);
-    Route::get('categories',[AdminController::class, 'categories']);
-    Route::post('category_store',[AdminController::class, 'category_store']);
-    Route::post('category_update',[AdminController::class, 'category_update']);
-    Route::get('category_delete/{id}',[AdminController::class, 'category_delete']);
+Route::get('/', function () {
+    return view('auth.login');
 });
 
-Route::prefix('conference-admin')->group(function () {
-    Route::get('pannel',[CAdminController::class, 'admin']);
-    Route::get('profile',[CAdminController::class, 'profile']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('author')->group(function () {
-    Route::get('pannel',[AuthorController::class, 'author']);
-    Route::get('profile',[AuthorController::class, 'profile']);
-});
-
-Route::prefix('reviewer')->group(function () {
-    Route::get('pannel',[ReviewerController::class, 'admin']);
-    Route::get('profile',[ReviewerController::class, 'profile']);
-});
-
+require __DIR__.'/auth.php';
