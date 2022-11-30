@@ -9,10 +9,10 @@ use Session;
 
 class AuthController extends Controller
 {
-    public function all(){
-        $category = Category::all();
-        return view('all',['title'=>'All Conferences'],compact('category'));
-    }
+    // public function all(){
+    //     $category = Category::where('status',1)->orderBy('category')->get();
+    //     return view('all',['title'=>'All Conferences'],compact('category'));
+    // }
 
     public function login(){
         return view('Auth.pages.login',['title'=>'Login']);
@@ -34,16 +34,16 @@ class AuthController extends Controller
                 Session::put('username', $user->name);
                 $request->session()->put('userrole', $user->role);
                 if($user->role == 'admin'){
-                    return redirect('admin-pannel');
+                    return redirect('admin/pannel');
                 }
                 elseif($user->role == 'cadmin'){
-                    return redirect('conference-admin-pannel');
+                    return redirect('conference-admin/pannel');
                 }
                 elseif($user->role == 'author'){
-                    return redirect('author-pannel');
+                    return redirect('author/pannel');
                 }
                 elseif($user->role == 'reviewer'){
-                    return redirect('reviewer-pannel');
+                    return redirect('reviewer/pannel');
                 }
             }
         }
@@ -54,7 +54,7 @@ class AuthController extends Controller
 
 
     public function register(){
-        $category = Category::all();
+        $category = Category::where('status',1)->orderBy('category')->get();
         return view('Auth.pages.register',['title'=>'Register'],compact('category'));
     }
 }

@@ -1,5 +1,5 @@
 @extends('Admin.layouts.default')
-@section('admin') 
+@section('admin')
 <main id="main" class="">
   <div class="pagetitle">
     <h1>Conferences</h1>
@@ -57,7 +57,7 @@
                     <label for="">Location</label>
                     <input type="text" name="" id="" class="form-control" placeholder="Enter your conference location" required>
                   </div>
-                
+
               </div>
 
               <!-- Modal footer -->
@@ -155,7 +155,7 @@
 
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
-  
+
 </footer><!-- End Footer -->
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

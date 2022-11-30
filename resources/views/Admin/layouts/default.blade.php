@@ -6,16 +6,17 @@
 <body>
   @include('Admin.includes.navbar')
   @include('Admin.includes.slidebar')
- 
+
   @yield("admin")
 
   @yield("profile")
 
   @yield("users")
 
+  @yield("categories")
 
 
-  
+
 
 
 

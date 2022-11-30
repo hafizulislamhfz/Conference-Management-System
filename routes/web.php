@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthorController;
@@ -17,20 +18,34 @@ use App\Http\Controllers\ReviewerController;
 |
 */
 
-Route::get('/',[AuthController::class, 'all']);
+Route::get('/',[HomeController::class, 'all']);
+
 Route::get('login',[AuthController::class, 'login']);
 Route::post('store_login',[AuthController::class, 'store_login']);
 Route::get('register',[AuthController::class, 'register']);
 
-Route::get('admin-pannel',[AdminController::class, 'admin']);
-Route::get('admin-profile',[AdminController::class, 'profile']);
-Route::get('admin-users',[AdminController::class, 'users']);
+Route::prefix('admin')->group(function () {
+    Route::get('pannel',[AdminController::class, 'admin']);
+    Route::get('profile',[AdminController::class, 'profile']);
+    Route::get('users',[AdminController::class, 'users']);
+    Route::get('categories',[AdminController::class, 'categories']);
+    Route::post('category_store',[AdminController::class, 'category_store']);
+    Route::post('category_update',[AdminController::class, 'category_update']);
+    Route::get('category_delete/{id}',[AdminController::class, 'category_delete']);
+});
 
-Route::get('conference-admin-pannel',[CAdminController::class, 'admin']);
-Route::get('conference-admin-profile',[CAdminController::class, 'profile']);
+Route::prefix('conference-admin')->group(function () {
+    Route::get('pannel',[CAdminController::class, 'admin']);
+    Route::get('profile',[CAdminController::class, 'profile']);
+});
 
-Route::get('author-pannel',[AuthorController::class, 'author']);
-Route::get('author-profile',[AuthorController::class, 'profile']);
+Route::prefix('author')->group(function () {
+    Route::get('pannel',[AuthorController::class, 'author']);
+    Route::get('profile',[AuthorController::class, 'profile']);
+});
 
-Route::get('reviewer-pannel',[ReviewerController::class, 'admin']);
-Route::get('reviewer-profile',[ReviewerController::class, 'profile']);
+Route::prefix('reviewer')->group(function () {
+    Route::get('pannel',[ReviewerController::class, 'admin']);
+    Route::get('profile',[ReviewerController::class, 'profile']);
+});
+
