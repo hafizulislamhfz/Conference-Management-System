@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Session;
 
 class ProfileController extends Controller
 {
@@ -39,6 +40,35 @@ class ProfileController extends Controller
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    // checkuser type
+    public function checkuser(){
+        if(Session::has('role')){
+            $all = session()->all();
+            $role = $all['role'];
+            if($role == "admin"){
+                return redirect('admin/pannel');
+            }elseif($role == "cadmin"){
+                return redirect('conference-admin/pannel');
+            }elseif($role == "reviewer"){
+                return redirect('reviewer/pannel');
+            }elseif($role == "author"){
+                return redirect("author/pannel");
+            }else{
+                return dd("hhh");
+                Auth::guard('web')->logout();
+                session()->invalidate();
+                session()->regenerateToken();
+                return redirect('/login')->with('status','You are not allow.');
+            }
+        }else{
+            Auth::guard('web')->logout();
+            session()->invalidate();
+            session()->regenerateToken();
+            return redirect('/login')->with('status','You are not allow.');
+        }
+
     }
 
     /**

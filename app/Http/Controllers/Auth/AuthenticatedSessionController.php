@@ -7,6 +7,8 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+Use Session;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -17,7 +19,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        return view('auth.login');
+        return view('Authh.pages.login',['title'=>'Login']);
     }
 
     /**
@@ -29,8 +31,12 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
         $request->authenticate();
-
         $request->session()->regenerate();
+
+        $email = $request->email;
+        $user = User::where('email',$email)->first();
+        $role = $user->role;
+        Session::put("role", $role);
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
@@ -48,6 +54,8 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+
+        session()->forget('role');
 
         return redirect('/');
     }

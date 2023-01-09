@@ -1,4 +1,4 @@
-@extends('Auth.layouts.default')
+@extends('Authh.layouts.default')
 
 @section('login')
 <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
@@ -21,22 +21,27 @@
                         <small class="or text-center">Login</small>
                         <div class="line"></div>
                     </div>
-                    <form action="{{ url('store_login') }}" method="post">
+                    <form action="{{ route('login') }}" method="post">
                     {{ csrf_field() }}
                         <div class="row px-3 mt-2">
                             <label class="mb-1"><h6 class="mb-0 text-sm">Email Address</h6></label>
-                            <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address" required>
+                            <input class="mb-3" type="text" name="email" placeholder="Enter a valid email address" value="{{ old('email') }}" required>
                         </div>
                         <div class="row px-3">
                             <label class="mb-1"><h6 class="mb-0 text-sm">Password</h6></label>
                             <input type="password" name="password" placeholder="Enter password" required>
                         </div>
-                        <div class="row px-3 mb-4">
+                        <div class="row px-3 mb-1">
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input id="chk1" type="checkbox" name="chk" class="custom-control-input"  checked> 
+                                <input id="remember_me" type="checkbox" name="remember" class="custom-control-input"  checked>
                                 <label for="chk1" class="custom-control-label text-sm">Remember me</label>
                             </div>
-                            <a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a>
+                            <a href="{{ route('password.request') }}" class="ml-auto mb-0 text-sm">Forgot Password?</a>
+                        </div>
+                        <div class="mt-2 mb-2">
+                            @if($errors->any())
+                                <span class="badge text-danger">{{$errors->first()}}</span>
+                            @endif
                         </div>
                         <div class="row mb-3 px-3">
                             <button type="submit" class="btn btn-blue text-center mr-5">Login</button>
@@ -47,11 +52,6 @@
                         <small class="font-weight-bold">Don't have an account? <a class="text-info" href="{{ url('register') }}">Register</a></small>
                     </div>
                     <div class="row mb-1">
-                    @if(Session::has('info'))
-                        <div class="text-danger ml-3">
-                            <strong>{{ Session::get('info') }}</strong>
-                        </div>
-                    @endif
                     </div>
                 </div>
             </div>

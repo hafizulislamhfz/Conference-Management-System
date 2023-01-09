@@ -9,8 +9,14 @@ use Session;
 
 class HomeController extends Controller
 {
-    public function all(){
+    public function home(){
         $category = Category::where('status',1)->orderBy('category')->get();
-        return view('all',['title'=>'All Conferences'],compact('category'));
+        return view('home',['title'=>'All Conferences'],compact('category'));
+    }
+
+    public function session(){
+        // $request->session()->invalidate();
+        $all = session()->all();
+        return dd($all);
     }
 }

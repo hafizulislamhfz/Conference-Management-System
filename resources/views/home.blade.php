@@ -43,13 +43,13 @@
                         <li class="nav-item">
                             <div class="form-inline">
                                 <select name="" id="" class="form-control font-weight-bold">
-                                    <option value="0">All category...</option>
+                                    <option value="0">Filter category...</option>
                                     @foreach($category as $c)
                                     <option value="">{{ $c->category }}</option>
                                     @endforeach
                                 </select>
                                 <input type="text" class="form-control" placeholder="keyword">
-                                <button type="submit" class="btn btn-primary">Filter</button>
+                                <button type="button" class="btn btn-danger">Reset</button>
                             </div>
                         </li>
                     </form>

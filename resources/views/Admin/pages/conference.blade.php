@@ -1,5 +1,5 @@
 @extends('Admin.layouts.default')
-@section('admin')
+@section('conference')
 <main id="main" class="">
   <div class="pagetitle">
     <h1>Conferences</h1>

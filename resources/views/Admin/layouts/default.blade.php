@@ -7,7 +7,7 @@
   @include('Admin.includes.navbar')
   @include('Admin.includes.slidebar')
 
-  @yield("admin")
+  @yield("conference")
 
   @yield("profile")
 
@@ -32,6 +32,7 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('Admin/js/main.js') }}"></script>
+  @stack('js')
 
 </body>
 </html>

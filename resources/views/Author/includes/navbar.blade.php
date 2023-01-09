@@ -21,6 +21,11 @@
         <a class="nav-link nav-icon search-bar-toggle " href="#">
           <i class="bi bi-search"></i>
         </a>
+      </li>
+      <li>
+        @if($errors->any())
+        <span class="" style="color:red;margin-right:50px;">{{$errors->first()}}</span>
+        @endif
       </li><!-- End Search Icon-->
 
       <li class="nav-item dropdown">
@@ -211,10 +216,13 @@
           </li>
 
           <li>
-            <a class="dropdown-item d-flex align-items-center" href="{{ url('login') }}">
-              <i class="bi bi-box-arrow-right"></i>
-              <span>Sign Out</span>
-            </a>
+            <form action="{{ route('logout') }}" method="post">
+                @csrf
+                <button type="submit" class="dropdown-item d-flex align-items-center">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Sign Out</span>
+                </button>
+            </form>
           </li>
 
         </ul><!-- End Profile Dropdown Items -->
