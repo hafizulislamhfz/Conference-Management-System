@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\User;
-use Session;
+use Illuminate\Support\Facades\Session;
 //////////////////////////////////////////////
 class AuthController extends Controller
 {

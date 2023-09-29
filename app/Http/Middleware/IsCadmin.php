@@ -4,7 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Session;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 
 class IsCadmin
 {
@@ -17,8 +19,15 @@ class IsCadmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Session::has('role') && Session::get('role') != 'cadmin'){
-            return redirect()->back()->withErrors(['error' => 'You are not allow.']);
+        if(Session::has('role')){
+            if(Session::get('role') != 'cadmin'){
+                return redirect()->back()->withErrors(['error' => 'You are not allow.', 'role' => 'Conference-Admin']);
+            }
+        }else{
+            Auth::guard('web')->logout();
+            session()->invalidate();
+            session()->regenerateToken();
+            return redirect('/');
         }
         return $next($request);
     }

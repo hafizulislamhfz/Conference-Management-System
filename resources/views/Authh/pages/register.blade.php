@@ -1,4 +1,4 @@
-@extends('Auth.layouts.default')
+@extends('Authh.layouts.default')
 
 @section('register')
 <body>
@@ -89,7 +89,7 @@
                             <select id="job" name="jobtitle" class="form-control custom-select bg-white border-left-0 border-md">
                                 <option value="0">All category...</option>
                                 @foreach($category as $c)
-                                <option value="">{{ $c->category }}</option>
+                                    <option value="">{{ $c->category }}</option>
                                 @endforeach
                             </select>
                         </div>

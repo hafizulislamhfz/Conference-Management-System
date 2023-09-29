@@ -1,5 +1,5 @@
 @extends('Admin.layouts.default')
-
+@section('title','Home | Profile')
 @section('profile')
 <main id="main" class="main">
 <section class="section profile">
@@ -10,7 +10,7 @@
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
               <img src="{{ asset('Admin/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
-              <h2>Kevin Anderson</h2>
+              <h2>{{ Auth::user()->name }}</h2>
               <h3>Web Designer</h3>
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -57,7 +57,7 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                    <div class="col-lg-9 col-md-8">{{ Auth::user()->name }}</div>
                   </div>
 
                   <div class="row">
@@ -87,7 +87,7 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                    <div class="col-lg-9 col-md-8">{{ Auth::user()->email }}</div>
                   </div>
 
                 </div>
@@ -110,7 +110,7 @@
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value="Kevin Anderson">
+                        <input name="fullName" type="text" class="form-control" id="fullName" value="{{ Auth::user()->name }}">
                       </div>
                     </div>
 
@@ -159,7 +159,7 @@
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="k.anderson@example.com">
+                        <input name="email" type="email" class="form-control" id="Email" value="{{ Auth::user()->email }}">
                       </div>
                     </div>
 
@@ -242,31 +242,36 @@
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
-                  <form>
+                  <form action="{{ url('admin/profile/password_change') }}" method="post" id="pass-change">
+                    @csrf
+                    <div class="passchangebody">
+                        <div class="row mb-3">
+                        <label for="password" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input name="password" type="password" class="form-control" id="password">
+                            <span class="text-danger error-text mt-2 password_error"></span>
+                        </div>
+                        </div>
 
-                    <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword">
-                      </div>
-                    </div>
+                        <div class="row mb-3">
+                        <label for="newpassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input name="newpassword" type="password" class="form-control" id="newpassword">
+                            <span class="text-danger error-text mt-2 newpassword_error"></span>
+                        </div>
+                        </div>
 
-                    <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
-                      </div>
+                        <div class="row mb-3">
+                        <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                        <div class="col-md-8 col-lg-9">
+                            <input name="renewpassword" type="password" class="form-control" id="renewpassword">
+                            <span class="text-danger error-text mt-2 renewpassword_error"></span>
+                        </div>
+                        </div>
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
+                      <button type="submit" class="btn btn-primary pass-change-btn">Change Password</button>
                     </div>
                   </form><!-- End Change Password Form -->
 
@@ -284,3 +289,63 @@
   </main>
 
 @endsection
+
+
+@push('js')
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'bottom-start',
+                showConfirmButton: false,
+                timer: 4000,
+                background: '#1B1212',
+                color: 'white',
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            //change password section start
+            $('#pass-change').on('submit', function(event) {
+                $('.error-text').text('');
+                event.preventDefault();
+                var form = $(this).serialize();
+                var url = $(this).attr('action');
+                $('.passchangebody').css('opacity', 0);
+                $('#profile-change-password').addClass('waitloader');
+                $('.pass-change-btn').prop('disabled', true);
+                $.post(url, form, function(data) {
+                    $('#profile-change-password').removeClass('waitloader');
+                    $('.passchangebody').css('opacity', 1);
+                    $('.pass-change-btn').removeAttr('disabled');
+                    if(data.pass_error == 1){
+                        $('.password_error').text('*'+data.pass_error_text);
+                    }
+                    else if (data.is_error == 1) {
+                        $.each(data.error, function(prefix, val) {
+                            $('span.' + prefix + '_error').text('*'+val[0]);
+                        });
+                    } else {
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Password updated successfully.'
+                        })
+                        $('#pass-change').trigger("reset");
+                    }
+                })
+            });
+            //change password section end
+
+        });
+    </script>
+@endpush

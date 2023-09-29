@@ -1,3 +1,14 @@
+@if($errors->has('error'))
+    @push('errorjs')
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oppss!{{ $errors->first('error') }}',
+                text: 'Please login as a {{ $errors->first('role') }} to acces.',
+            })
+        </script>
+    @endpush
+@endif
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
   <div class="d-flex align-items-center justify-content-between">
@@ -23,12 +34,6 @@
         </a>
       </li>
       <!-- End Search Icon-->
-      <li>
-        @if($errors->any())
-        <span class="badge badge-danger mr-5">{{$errors->first()}}</span>
-        @endif
-      </li>
-
       <li class="nav-item dropdown">
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-bell"></i>
@@ -186,7 +191,7 @@
           </li>
 
           <li>
-            <a class="dropdown-item d-flex align-items-center" href="{{ url('admin-profile') }}">
+            <a class="dropdown-item d-flex align-items-center" href="{{ url('admin/profile') }}">
               <i class="bi bi-person"></i>
               <span>My Profile</span>
             </a>
@@ -196,7 +201,7 @@
           </li>
 
           <li>
-            <a class="dropdown-item d-flex align-items-center" href="{{ url('admin-profile') }}">
+            <a class="dropdown-item d-flex align-items-center" href="{{ url('admin/profile') }}">
               <i class="bi bi-gear"></i>
               <span>Account Settings</span>
             </a>

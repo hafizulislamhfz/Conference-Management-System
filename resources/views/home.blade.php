@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title }}</title>
+    <title>{{ config('app.name'); }} | Home</title>
     <link href="{{ asset('Admin/img/favicon.png') }}" rel="icon">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -114,5 +114,19 @@
 
         </table>
     </div>
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+        <div class="copyright">
+        &copy; Copyright <strong><span>{{ config('app.name'); }}</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+        Designed by <a href="https://hafizulislamhfz.github.io/Hafizul-portfolio/" target="_blank">Hafizul Islam</a>
+        </div>
+    </footer><!-- End Footer -->
+
 </body>
 </html>

@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\DataTables;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
-use DataTables;
-use Validator;
+
 
 class CategoryController extends Controller
 {
@@ -29,12 +32,12 @@ class CategoryController extends Controller
                 ->rawColumns(['status','action'])
                 ->make(true);
         }
-        return view('Admin.pages.category.categories',['title'=>'Categories']);
+        return view('Admin.pages.conference.categories');
     }
 
     public function category_store(Request $request){
         $validator = Validator::make($request->all(),[
-            'category'=>'required|unique:categories|max:55|regex:/^[a-zA-Z]+$/u',
+            'category'=>'required|unique:categories|max:55|regex:/^[\pL\s]+$/u',
             'status'=>'required|in:0,1',
         ]);
 
@@ -57,7 +60,7 @@ class CategoryController extends Controller
     public function category_update(Request $request){
         $category = Category::find($request->categoryid);
         $validator = Validator::make($request->all(),[
-            'category'=>'required|max:55|regex:/^[a-zA-Z]+$/u|unique:categories,category,'.$request->categoryid.'',
+            'category'=>'required|max:55|regex:/^[\pL\s]+$/u|unique:categories,category,'.$request->categoryid.'',
             'status'=>'required|in:0,1'
         ]);
         if(!$validator->passes()){

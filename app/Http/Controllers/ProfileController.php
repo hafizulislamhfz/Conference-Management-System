@@ -6,7 +6,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
@@ -16,12 +16,12 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\View\View
      */
-    public function edit(Request $request)
-    {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
-    }
+    // public function edit(Request $request)
+    // {
+    //     return view('profile.edit', [
+    //         'user' => $request->user(),
+    //     ]);
+    // }
 
     /**
      * Update the user's profile information.
@@ -29,47 +29,46 @@ class ProfileController extends Controller
      * @param  \App\Http\Requests\ProfileUpdateRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(ProfileUpdateRequest $request)
-    {
-        $request->user()->fill($request->validated());
+    // public function update(ProfileUpdateRequest $request)
+    // {
+    //     $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+    //     if ($request->user()->isDirty('email')) {
+    //         $request->user()->email_verified_at = null;
+    //     }
 
-        $request->user()->save();
+    //     $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
-    }
+    //     return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    // }
 
     // checkuser type
-    public function checkuser(){
-        if(Session::has('role')){
-            $all = session()->all();
-            $role = $all['role'];
-            if($role == "admin"){
-                return redirect('admin/pannel');
-            }elseif($role == "cadmin"){
-                return redirect('conference-admin/pannel');
-            }elseif($role == "reviewer"){
-                return redirect('reviewer/pannel');
-            }elseif($role == "author"){
-                return redirect("author/pannel");
-            }else{
-                return dd("hhh");
-                Auth::guard('web')->logout();
-                session()->invalidate();
-                session()->regenerateToken();
-                return redirect('/login')->with('status','You are not allow.');
-            }
-        }else{
-            Auth::guard('web')->logout();
-            session()->invalidate();
-            session()->regenerateToken();
-            return redirect('/login')->with('status','You are not allow.');
-        }
+    // public function checkuser(){
+    //     if(Session::has('role')){
+    //         $all = session()->all();
+    //         $role = $all['role'];
+    //         if($role == "admin"){
+    //             return redirect('admin/dashboard');
+    //         }elseif($role == "cadmin"){
+    //             return redirect('conference-admin/pannel');
+    //         }elseif($role == "reviewer"){
+    //             return redirect('reviewer/pannel');
+    //         }elseif($role == "author"){
+    //             return redirect("author/pannel");
+    //         }else{
+    //             Auth::guard('web')->logout();
+    //             session()->invalidate();
+    //             session()->regenerateToken();
+    //             return redirect('/login')->with('status','You are not allow.');
+    //         }
+    //     }else{
+    //         Auth::guard('web')->logout();
+    //         session()->invalidate();
+    //         session()->regenerateToken();
+    //         return redirect('/login')->with('status','You are not allow.');
+    //     }
 
-    }
+    // }
 
     /**
      * Delete the user's account.
@@ -77,21 +76,21 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request)
-    {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current-password'],
-        ]);
+//     public function destroy(Request $request)
+//     {
+//         $request->validateWithBag('userDeletion', [
+//             'password' => ['required', 'current-password'],
+//         ]);
 
-        $user = $request->user();
+//         $user = $request->user();
 
-        Auth::logout();
+//         Auth::logout();
 
-        $user->delete();
+//         $user->delete();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+//         $request->session()->invalidate();
+//         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
-    }
+//         return Redirect::to('/');
+//     }
 }

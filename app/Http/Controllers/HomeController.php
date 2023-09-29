@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function home(){
         $category = Category::where('status',1)->orderBy('category')->get();
-        return view('home',['title'=>'All Conferences'],compact('category'));
+        return view('home',compact('category'));
     }
 
     public function session(){

@@ -341,9 +341,16 @@ table {
   font-weight: 600;
 }
 
-.breadcrumb button{
-    margin-left:870px;
+.nav-container {
+    position:relative;
+  }
+.add_button {
+    position:absolute;
+    right:1rem;
+    top:50%;
+    transform:translateY(-50%);
 }
+
 
 /* Bordered Tabs */
 .nav-tabs-bordered {
@@ -703,23 +710,23 @@ table {
   transition: 0.3;
   padding: 10px 15px;
   border-radius: 4px;
-  color: #012970;
-  background: #fff;
+  background: #f6f9ff;
+  color: #4154f1;
 }
 
 .sidebar-nav .nav-link i {
   font-size: 16px;
   margin-right: 10px;
-  color: #899bbd;
+  color: #4154f1;
 }
 
 .sidebar-nav .nav-link.collapsed {
-    background: #f6f9ff;
-    color: #4154f1;
+    color: #012970;
+    background: #fff;
 }
 
 .sidebar-nav .nav-link.collapsed i {
-  color: #4154f1;
+    color: #899bbd;
 }
 
 .sidebar-nav .nav-link:hover {
@@ -758,7 +765,7 @@ table {
 }
 
 .sidebar-nav .nav-content a i {
-  font-size: 6px;
+  font-size: 15px;
   margin-right: 8px;
   line-height: 0;
   border-radius: 50%;
@@ -767,11 +774,12 @@ table {
 .sidebar-nav .nav-content a:hover,
 .sidebar-nav .nav-content a.active {
   color: #4154f1;
+  background: #f6f9ff;
 }
 
-.sidebar-nav .nav-content a.active i {
+/* .sidebar-nav .nav-content a.active i {
   background-color: #4154f1;
-}
+} */
 
 /*--------------------------------------------------------------
 # Dashboard
@@ -1274,6 +1282,12 @@ table {
     z-index: 100;
 }
 
+.waitloader{
+    background: #fff url('Loader.svg') no-repeat center center;
+    background-size: 15%;
+}
+
+
 .dataTables_wrapper .dataTables_info {
     color: #4154f1 !important;
     font-family: "Nunito", sans-serif;
@@ -1287,7 +1301,7 @@ table {
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {
-    color: #18d26e !important;
+    /* color: #18d26e !important; */
     margin: 3px 6px 0px 3px !important;
     border: 2px solid #012970 !important;
     border-radius: 10% !important;
@@ -1295,7 +1309,7 @@ table {
 }
 
 /* .dataTables_wrapper .dataTables_paginate .paginate_button.previous:hover {
-    color: rgb(126, 30, 30) !important;
+    color: rgb(126, 30, 30)!important;
     background: #afbdd4 !important;
 } */
 
@@ -1307,3 +1321,22 @@ table {
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     cursor: not-allowed;
 }
+
+.dataTables_filter .refresh {
+    color: rgb(0, 0, 0);
+    background-color: #9bb1d4;
+}
+
+
+/* page-spinner at url loading*/
+#spinner{
+    background: transparent url('Loader.svg') no-repeat center center;
+    background-size: 15%;
+    height: 100vh;
+    width: 100%;
+    position:fixed;
+    z-index: 9999;
+}
+
+
+
